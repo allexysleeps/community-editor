@@ -1,25 +1,8 @@
+'use strict';
+
 const axios = require('axios');
-const cheerio = require('cheerio');
-const parsedTags = require('../config').parsedTags;
-
-const getCheerioSelector = () => {
-	let selector = '';
-	parsedTags.forEach((item) => {
-		selector += `div.body-copy ${item}, `
-	});
-	return selector;
-};
-
-const parseArticleCheerio = (html, res) => {
-	const $ = cheerio.load(html);
-	const selector = getCheerioSelector();
-	const articleContent =  $(`article`)[0];
-	console.log(articleContent);
-	res.sendStatus(200);
-
-};
-
-
+const parseArticle = require('../utils/htmlParser');
+const insertArticle = require('../dbActions/insertArticle');
 
 function suggestArticle (req, res) {
 	const url = req.query.articleURL;
@@ -31,8 +14,10 @@ function suggestArticle (req, res) {
 		url,
 		'Content-type': 'text/html'
 	})
-		.then((response) => {
-			parseArticleCheerio(response.data, res);
+		.then((response) => parseArticle(response.data))
+		.then((data) => insertArticle({url, title: data.title, pharagraphs: data.pharagraphs}))
+		.then((data) => {
+			res.json(data);
 		})
 		.catch((err) => {
 			console.log(err);

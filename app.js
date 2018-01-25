@@ -11,6 +11,6 @@ app
 	.use(bodyParser.urlencoded({extended: false}))
 	.use('/fb/*', express.static(reactApp))
 	.use(Routes)
-	.listen(serverPort)
+	.listen(serverPort);
 
 console.log(`it's alive on localhost/${serverPort}`);

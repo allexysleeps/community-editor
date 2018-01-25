@@ -9,6 +9,8 @@
     "circular-json": "^0.5.1",
     "express": "^4.16.2",
     "htmlparser2": "^3.9.2",
+    "mongodb": "^3.0.1",
+    "mongoose": "^5.0.1",
     "nodemon": "^1.14.11"
   },
   "devDependencies": {},
