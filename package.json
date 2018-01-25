@@ -1,0 +1,26 @@
+{
+  "name": "ciclum-aller-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.2",
+    "nodemon": "^1.14.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/allexysleeps/ciclum-aller-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/allexysleeps/ciclum-aller-test/issues"
+  },
+  "homepage": "https://gitlab.com/allexysleeps/ciclum-aller-test#README"
+}
