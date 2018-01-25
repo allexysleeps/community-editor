@@ -5,7 +5,9 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.17.1",
+    "circular-json": "^0.5.1",
     "express": "^4.16.2",
+    "htmlparser2": "^3.9.2",
     "nodemon": "^1.14.11"
   },
   "devDependencies": {},
