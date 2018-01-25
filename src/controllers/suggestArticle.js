@@ -8,7 +8,8 @@ const parseArticle = (html, res) => {
 			console.log(error);
 			res.sendStatus(500);
 		} else {
-			res.json(CircluarJSON.stringify(dom)).status(200);
+			console.log(dom);
+			res.sendStatus(200);
 		}
 	});
 
