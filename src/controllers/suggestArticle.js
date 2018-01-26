@@ -18,7 +18,9 @@ const addNewArticle = (url, res) => {
 		.then((data) => insertArticle({url, title: data.title, paragraphs: data.paragraphs}))
 		.then((data) => {
 		  console.log(data);
-			res.json(getResponseStructure(data, userSuggestArticle));
+			res.json(getResponseStructure(
+			  data, userSuggestArticle, {passId: true, idPrefix: 'article'}
+      ));
 		})
 		.catch((err) => {
 			console.log(err);
@@ -37,7 +39,9 @@ function suggestArticle (req, res) {
 	findArticle({url})
 		.then((data) => {
 			if (data) {
-				res.json(getResponseStructure(data, userSuggestArticle));
+        res.json(getResponseStructure(
+          data, userSuggestArticle, {passId: true, idPrefix: 'article'}
+        ));
 			} else {
 				addNewArticle(url, res);
 			}

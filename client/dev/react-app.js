@@ -4,10 +4,10 @@ import SuggestView from "./js/Views/SuggestView/SuggestView.jsx";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 require('./styles/main.sass');
 
-const appContainder = document.getElementById('app');
+const appContainer = document.getElementById('app');
 
 ReactDOM.render(
   <MuiThemeProvider >
     <SuggestView/>
   </MuiThemeProvider>
-, appContainder);
+, appContainer);

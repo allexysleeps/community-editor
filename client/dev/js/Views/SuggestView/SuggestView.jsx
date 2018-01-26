@@ -34,7 +34,7 @@ class SuggestView extends React.Component {
 
   render () {
     const {title, paragraphs, articleId} = this.state;
-    if (articleId) {
+    if (!articleId) {
       return <CircleLoader />
     }
     return (
