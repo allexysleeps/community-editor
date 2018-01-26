@@ -1,5 +1,4 @@
 'use strict';
-
 const mongo = require('../database');
 
 const insertArticle = ({url, title, pharagraphs}) => {

@@ -2,13 +2,13 @@
 
 const axios = require('axios');
 const parseArticle = require('../utils/htmlParser');
+const findArticle = require('../dbActions/findArticle');
 const insertArticle = require('../dbActions/insertArticle');
+const responseStructures = require('../utils/responseStructures');
 
-function suggestArticle (req, res) {
-	const url = req.query.articleURL;
-	if (!url) {
-		return res.sendStatus(404);
-	}
+const {userSuggestArticle, getResponseStructure} = responseStructures;
+
+const addNewArticle = (url, res) => {
 	axios({
 		method: 'get',
 		url,
@@ -17,12 +17,34 @@ function suggestArticle (req, res) {
 		.then((response) => parseArticle(response.data))
 		.then((data) => insertArticle({url, title: data.title, pharagraphs: data.pharagraphs}))
 		.then((data) => {
-			res.json(data);
+			res.json(getResponseStructure(data, userSuggestArticle));
+		})
+		.catch((err) => {
+			console.log(err);
+			if (err.response && err.response.status === 404) {
+				res.sendStatus(404);
+			}
+			res.sendStatus(500);
+		})
+};
+
+function suggestArticle (req, res) {
+	const url = req.query.articleURL;
+	if (!url) {
+		return res.sendStatus(404);
+	}
+	findArticle({url})
+		.then((data) => {
+			if (data) {
+				res.json(getResponseStructure(data, userSuggestArticle));
+			} else {
+				addNewArticle(url, res);
+			}
 		})
 		.catch((err) => {
 			console.log(err);
 			res.sendStatus(500);
-		})
+		});
 }
 
 module.exports = suggestArticle;
