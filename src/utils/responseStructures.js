@@ -1,3 +1,5 @@
+'use strict';
+
 const userSuggestArticle = {
 	title: null,
 	pharagraphs: null

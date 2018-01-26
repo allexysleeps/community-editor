@@ -5,18 +5,35 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.17.1",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "cheerio": "^1.0.0-rc.2",
     "circular-json": "^0.5.1",
+    "css-loader": "^0.28.9",
     "express": "^4.16.2",
     "htmlparser2": "^3.9.2",
+    "material-ui": "^0.20.0",
     "mongodb": "^3.0.1",
     "mongoose": "^5.0.1",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.11",
+    "prop-types": "^15.6.0",
+    "query-string": "^5.0.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app"
+    "dev-server": "nodemon app",
+    "dev-client": "webpack -w",
+    "start": "app"
   },
   "repository": {
     "type": "git",
