@@ -11,14 +11,14 @@ const getCheerioSelector = () => {
 
 const parseArticle = (html) => {
 	const spreadArticle = {
-		pharagraphs: []
+		paragraphs: []
 	};
 	const $ = cheerio.load(html, {ignoreWhitespace: true,});
 	const articleContent =  $('article').find(getCheerioSelector());
 	spreadArticle.title = $('h2.headline').text();
 	articleContent.each((index, item) => {
-		spreadArticle.pharagraphs.push({
-			pharagraphId: index,
+		spreadArticle.paragraphs.push({
+			paragraphId: index,
 			text: $(item).text()
 		})
 	});

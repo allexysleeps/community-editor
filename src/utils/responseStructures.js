@@ -2,7 +2,7 @@
 
 const userSuggestArticle = {
 	title: null,
-	pharagraphs: null
+	paragraphs: null
 };
 
 const getResponseStructure = (data, structure) => {

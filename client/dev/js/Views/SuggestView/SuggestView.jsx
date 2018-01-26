@@ -2,14 +2,17 @@ import React from 'react';
 import queryString from 'query-string';
 import AppBar from 'material-ui/AppBar';
 import {getArticlePharagraphs} from "../../API/articleSuggest";
+import TextSuggestionForm from "../../Components/TextSuggestionForm/TextSuggestionForm";
+import CircleLoader from "../../Components/CircleLoader/CircleLoader";
+require('./SuggestView.sass');
 
 class SuggestView extends React.Component {
   constructor() {
     super();
     this.state = {
       title: null,
-      pharagraphs: [],
-      articleID: null
+      paragraphs: [],
+      articleId: null
     }
   }
   
@@ -18,9 +21,9 @@ class SuggestView extends React.Component {
     if (articleURL) {
       getArticlePharagraphs(articleURL)
         .then((res) => {
-          const {title, pharagraphs, articleID} = res.data;
+          const {title, paragraphs, articleId} = res.data;
           this.setState({
-            title, pharagraphs, articleID
+            title, paragraphs, articleId
           })
         })
         .catch((err) => {
@@ -30,10 +33,24 @@ class SuggestView extends React.Component {
   }
 
   render () {
-    const {title, pharagraphs, articleID} = this.state;
+    const {title, paragraphs, articleId} = this.state;
+    if (articleId) {
+      return <CircleLoader />
+    }
     return (
-      <div>
+      <div className='suggest-view'>
         <AppBar title={title} showMenuIconButton={false} />
+        <div className='suggest-view_wrapper'>
+          {
+            paragraphs.map((item, index) => (
+              <TextSuggestionForm
+                key={index}
+                articleId={articleId}
+                paragraphId={item.paragraphId}
+                originalText={item.text}/>
+            ))
+          }
+        </div>
       </div>
     )
   }

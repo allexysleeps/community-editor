@@ -1,14 +1,14 @@
 'use strict';
 const mongo = require('../database');
 
-const insertArticle = ({url, title, pharagraphs}) => {
+const insertArticle = ({url, title, paragraphs}) => {
 	return new Promise((resolve, reject) => {
 		mongo.db.collection('articles')
-			.insert({url, title, pharagraphs}, (err, result) => {
+			.insert({url, title, paragraphs}, (err, result) => {
 				if (err) {
 					reject(err)
 				}
-				resolve(result);
+				resolve(result.ops[0]);
 			});
 	})
 };

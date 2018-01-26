@@ -15,8 +15,9 @@ const addNewArticle = (url, res) => {
 		'Content-type': 'text/html'
 	})
 		.then((response) => parseArticle(response.data))
-		.then((data) => insertArticle({url, title: data.title, pharagraphs: data.pharagraphs}))
+		.then((data) => insertArticle({url, title: data.title, paragraphs: data.paragraphs}))
 		.then((data) => {
+		  console.log(data);
 			res.json(getResponseStructure(data, userSuggestArticle));
 		})
 		.catch((err) => {
