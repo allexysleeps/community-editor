@@ -5,6 +5,7 @@ const suggestArticle = require('./controllers/suggestArticle');
 const saveSuggestion = require('./controllers/saveSuggestion');
 const getSuggestResult = require('./controllers/getSuggestResult');
 const deleteAllSuggestions = require('./controllers/deleteAllSuggestions');
+const approveSuggestion = require('./controllers/approveSuggestion');
 
 Router
 	.get('/test', (req, res) => {
@@ -13,6 +14,7 @@ Router
 	.get('/suggest', suggestArticle)
   .post('/suggest/text', saveSuggestion)
   .get('/result', getSuggestResult)
-  .delete('/result/:articleId/suggestions/all/:paragraphId', deleteAllSuggestions);
-
+  .delete('/result/:articleId/suggestions/all/:paragraphId', deleteAllSuggestions)
+  .put('/result/paragraph/:articleId/:paragraphId', approveSuggestion)
+  ;
 module.exports = Router;

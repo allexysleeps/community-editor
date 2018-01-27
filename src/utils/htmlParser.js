@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const parsedTags = require('../config').parsedTags;
+const shortid = require('shortid');
 
 const getCheerioSelector = () => {
 	let selector = '';
@@ -18,8 +19,9 @@ const parseArticle = (html) => {
 	spreadArticle.title = $('h2.headline').text();
 	articleContent.each((index, item) => {
 		spreadArticle.paragraphs.push({
-			paragraphId: index,
-			text: $(item).text()
+			paragraphId: shortid.generate(),
+			text: $(item).text(),
+      approved: false
 		})
 	});
 	return spreadArticle;

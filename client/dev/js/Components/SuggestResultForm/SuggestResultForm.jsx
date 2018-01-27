@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import UsersTextForm from "../UsersTextForm/UsersTextForm.jsx";
-import {deleteAllSuggestions} from "../../API/suggestResults";
+import {deleteAllSuggestions, sendSuggestion} from "../../API/suggestResults";
 
 class SuggestResultForm extends React.Component {
   constructor () {
@@ -19,8 +19,15 @@ class SuggestResultForm extends React.Component {
     this.setState({expanded})
   };
   
-  approveSuggestion = (suggestionId) => {
-    console.log(suggestionId);
+  approveSuggestion = (text) => {
+    const {paragraphId, articleId} = this.props;
+    sendSuggestion({paragraphId, articleId, text})
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   };
   
   deleteSuggestions = () => {
@@ -56,10 +63,10 @@ class SuggestResultForm extends React.Component {
             <p style={styles.header.title}>users suggestions:</p>
             {
               suggestions.map((item, index) => {
-                const {usersText, suggestionId} = item;
+                const {usersText} = item;
                 return <UsersTextForm
                   key={index}
-                  onClick={() => this.approveSuggestion(suggestionId)}
+                  onClick={() => this.approveSuggestion(usersText)}
                   usersText={usersText}/>
               })
             }
