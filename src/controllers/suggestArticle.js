@@ -1,5 +1,4 @@
 'use strict';
-
 const axios = require('axios');
 const parseArticle = require('../utils/htmlParser');
 const findArticle = require('../dbActions/findArticle');
@@ -17,7 +16,6 @@ const addNewArticle = (url, res) => {
 		.then((response) => parseArticle(response.data))
 		.then((data) => insertArticle({url, title: data.title, paragraphs: data.paragraphs}))
 		.then((data) => {
-		  console.log(data);
 			res.json(getResponseStructure(
 			  data, userSuggestArticle, {passId: true, idPrefix: 'article'}
       ));

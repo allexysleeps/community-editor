@@ -4,7 +4,6 @@ const insertSuggestedText = require('../dbActions/insertSuggestedText');
 function saveSuggestion (req, res) {
   insertSuggestedText(req.body)
     .then((data) => {
-      console.log(data);
       res.sendStatus(200);
     })
     .catch((err) => {
