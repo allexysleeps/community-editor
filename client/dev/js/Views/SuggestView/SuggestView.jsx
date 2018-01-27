@@ -2,7 +2,7 @@ import React from 'react';
 import queryString from 'query-string';
 import AppBar from 'material-ui/AppBar';
 import {getArticlePharagraphs} from "../../API/articleSuggest";
-import TextSuggestionForm from "../../Components/TextSuggestionForm/TextSuggestionForm";
+import TextSuggestionForm from "../../Components/TextSuggestionForm/TextSuggestionForm.jsx";
 import CircleLoader from "../../Components/CircleLoader/CircleLoader";
 require('./SuggestView.sass');
 

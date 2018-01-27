@@ -2,7 +2,14 @@
 const insertSuggestedText = require('../dbActions/insertSuggestedText');
 
 function saveSuggestion (req, res) {
-  insertSuggestedText(req.body)
+  const {articleId, articleURL, paragraphId, usersText} = req.body;
+  const newSuggestion  = {
+    articleId,
+    articleURL,
+    paragraphId,
+    usersText
+  };
+  insertSuggestedText(newSuggestion)
     .then((data) => {
       res.sendStatus(200);
     })

@@ -34,7 +34,7 @@ function suggestArticle (req, res) {
 	if (!url) {
 		return res.sendStatus(404);
 	}
-	findArticle({url})
+	findArticle(url)
 		.then((data) => {
 			if (data) {
         res.json(getResponseStructure(

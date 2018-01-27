@@ -5,6 +5,11 @@ const userSuggestArticle = {
 	paragraphs: null
 };
 
+const suggestionsArray = {
+  usersText: null,
+  paragraphId: null
+};
+
 const getResponseStructure = (data, structure, idParams = {passId: false, idPrefix: ''}) => {
 	const structuredResponse = {};
 	for (let key in structure) {
@@ -21,5 +26,6 @@ const getResponseStructure = (data, structure, idParams = {passId: false, idPref
 
 module.exports = {
 	userSuggestArticle,
-	getResponseStructure
+	getResponseStructure,
+  suggestionsArray
 };
