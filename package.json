@@ -1,5 +1,5 @@
 {
-  "name": "ciclum-aller-test",
+  "name": "community-editor",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -41,13 +41,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/allexysleeps/ciclum-aller-test.git"
+    "url": "git+ssh://git@gitlab.com/allexysleeps/community-editor.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/allexysleeps/ciclum-aller-test/issues"
+    "url": "https://gitlab.com/allexysleeps/community-editor/issues"
   },
-  "homepage": "https://gitlab.com/allexysleeps/ciclum-aller-test#README"
+  "homepage": "https://gitlab.com/allexysleeps/community-editor#README"
 }
