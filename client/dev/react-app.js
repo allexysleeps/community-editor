@@ -8,7 +8,7 @@ import Layout from "./js/Views/Layout/Layout";
 require('./styles/main.sass');
 
 const appContainer = document.getElementById('app');
-const history = createHistory();
+export const history = createHistory();
 
 
 ReactDOM.render(

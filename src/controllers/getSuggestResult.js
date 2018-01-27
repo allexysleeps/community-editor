@@ -10,10 +10,11 @@ const formatResponse = (article, suggestions) => {
     articleId: _id,
     paragraphs: [],
   };
-  paragraphs.forEach(({paragraphId, text}) => {
+  paragraphs.forEach(({paragraphId, text, approved}) => {
     let hasSuggestions = false;
     const paragraphItem = {
-      paragraphId: paragraphId,
+      paragraphId,
+      approved,
       originalText: text,
       suggestions: []
     };

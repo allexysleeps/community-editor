@@ -6,7 +6,6 @@ function approveSuggestion (req, res) {
   const {text} = req.body;
   updateParagraph({articleId, paragraphId, text})
     .then((data) => {
-      console.log(data);
       res.sendStatus(200);
     })
     .catch((err) => {

@@ -6,12 +6,14 @@ import UsersTextForm from "../UsersTextForm/UsersTextForm.jsx";
 import {deleteAllSuggestions, sendSuggestion} from "../../API/suggestResults";
 
 class SuggestResultForm extends React.Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
+      currentText: props.originalText,
       customSuggest: '',
       expanded: false,
-      hidden: false
+      approved: props.approved,
+      deleted: false
     }
   }
   
@@ -23,7 +25,10 @@ class SuggestResultForm extends React.Component {
     const {paragraphId, articleId} = this.props;
     sendSuggestion({paragraphId, articleId, text})
       .then((res) => {
-        console.log(res);
+        this.setState({
+          currentText: text,
+          approved: true
+        })
       })
       .catch((err) => {
         console.log(err);
@@ -34,18 +39,19 @@ class SuggestResultForm extends React.Component {
     const {paragraphId, articleId} = this.props;
     deleteAllSuggestions({articleId, paragraphId})
       .then((res) => {
-        console.log(res);
-        this.setState({hidden: true})
+        this.setState({deleted: true})
       })
       .catch((err) => {
         console.log(err);
       })
   };
   
+  
+  
   render() {
-    const {expanded, hidden} = this.state;
-    const {originalText, suggestions} = this.props;
-    if (hidden) {
+    const {currentText, expanded, approved, deleted} = this.state;
+    const {suggestions, showApproved} = this.props;
+    if (deleted || (approved && !showApproved)) {
       return null;
     }
     return (
@@ -56,7 +62,7 @@ class SuggestResultForm extends React.Component {
           onExpandChange={this.handleExpandChange}>
           <CardHeader
             title='Original text'
-            subtitle={originalText}
+            subtitle={currentText}
             titleStyle={styles.header.title}
             showExpandableButton/>
           <CardText expandable>

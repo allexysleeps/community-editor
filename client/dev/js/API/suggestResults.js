@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const getSuggestResults = ({url, showApproved}) => {
-  return axios.get(`/result?articleURL=${url}&${showApproved ? 'showApproved=true' : ''}`)
+export const getSuggestResults = ({url}) => {
+  return axios.get(`/result?articleURL=${url}`)
 };
 
 export const deleteAllSuggestions = ({paragraphId, articleId}) => {

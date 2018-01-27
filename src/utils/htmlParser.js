@@ -1,6 +1,7 @@
 const cheerio = require('cheerio');
-const parsedTags = require('../config').parsedTags;
 const shortid = require('shortid');
+
+const parsedTags = ['h2', 'p'];
 
 const getCheerioSelector = () => {
 	let selector = '';
