@@ -6,7 +6,6 @@ const findSuggestions = (articleURL) => {
     mongo.db.collection('suggestions')
       .find({articleURL}, {fields: {paragraphId: 1, usersText: 1}})
       .toArray((err, result) => {
-        console.log(result);
         if (err) {
           reject(err);
         }

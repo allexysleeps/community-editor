@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import UsersTextForm from "../UsersTextForm/UsersTextForm.jsx";
+import {deleteAllSuggestions} from "../../API/suggestResults";
 
 class SuggestResultForm extends React.Component {
   constructor () {
@@ -10,7 +11,7 @@ class SuggestResultForm extends React.Component {
     this.state = {
       customSuggest: '',
       expanded: false,
-      hide: false
+      hidden: false
     }
   }
   
@@ -22,9 +23,24 @@ class SuggestResultForm extends React.Component {
     console.log(suggestionId);
   };
   
+  deleteSuggestions = () => {
+    const {paragraphId, articleId} = this.props;
+    deleteAllSuggestions({articleId, paragraphId})
+      .then((res) => {
+        console.log(res);
+        this.setState({hidden: true})
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  };
+  
   render() {
-    const {expanded} = this.state;
+    const {expanded, hidden} = this.state;
     const {originalText, suggestions} = this.props;
+    if (hidden) {
+      return null;
+    }
     return (
       <div style={styles.wrapper}>
         <Card
@@ -49,7 +65,11 @@ class SuggestResultForm extends React.Component {
             }
           </CardText>
         </Card>
-        <RaisedButton label='Delete' backgroundColor='#B71C1C' labelColor='#fff'/>
+        <RaisedButton
+          onClick={this.deleteSuggestions}
+          label='Delete'
+          backgroundColor='#B71C1C'
+          labelColor='#fff'/>
       </div>
     )
   }

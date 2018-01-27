@@ -1,5 +1,5 @@
 import React from 'react';
-import {getSuggestResults} from "../../API/getSuggestResults";
+import {getSuggestResults} from "../../API/suggestResults";
 import queryString from "query-string";
 import CircleLoader from "../../Components/CircleLoader/CircleLoader";
 import {AppBar} from "material-ui";
@@ -39,6 +39,7 @@ class SuggestResults extends React.Component {
           paragraphs.map((item, index) => {
             const {originalText, paragraphId, suggestions} = item;
             return <SuggestResultForm
+              articleId={articleId}
               originalText={originalText}
               paragraphId={paragraphId}
               suggestions={suggestions}
