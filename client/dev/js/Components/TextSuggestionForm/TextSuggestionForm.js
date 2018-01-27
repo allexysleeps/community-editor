@@ -4,19 +4,20 @@ import {Card, CardHeader, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/action/done';
+import {sendSuggestionText} from "../../API/articleSuggest";
 
 class TextSuggestionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editedText: props.originalText,
+      usersText: props.originalText,
       expanded: false
     }
   }
   
   handleTextChange = (e) => {
     this.setState({
-      editedText: e.target.value
+      usersText: e.target.value
     })
   };
   
@@ -25,17 +26,24 @@ class TextSuggestionForm extends React.Component {
   };
   
   sendChanges = () => {
-    const {articleId, paragraphId} = this.props;
-    const {editedText} = this.state;
-    console.log(`${articleId}, ${paragraphId}, ${editedText}`);
-    this.setState({
-      expanded: false
-    });
+    const {articleId, paragraphId, articleURL, originalText} = this.props;
+    const {usersText} = this.state;
+    sendSuggestionText({articleId, articleURL, paragraphId, usersText, originalText})
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          expanded: false
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    
   };
   
   render() {
     const {originalText} = this.props;
-    const {expanded, editedText} = this.state;
+    const {expanded, usersText} = this.state;
     return (
       <Card
         style={styles.container}
@@ -49,7 +57,7 @@ class TextSuggestionForm extends React.Component {
         <CardText expandable>
           users version <br/>
           <TextField
-            value={editedText}
+            value={usersText}
             onChange={this.handleTextChange}
             style={styles.textField}
             id='suggestion-text'
@@ -59,7 +67,7 @@ class TextSuggestionForm extends React.Component {
             rowsMax={6}/>
           <CardText style={styles.submitBlock}>
             <FloatingActionButton
-              disabled={!editedText || editedText === originalText}
+              disabled={!usersText || usersText === originalText}
               onClick={this.sendChanges}
               style={styles.button}
               mini>
@@ -105,6 +113,15 @@ const styles = {
 TextSuggestionForm.propTypes = {
   onSubmit: PropTypes.func,
   originalText: PropTypes.string,
+  articleURL: PropTypes.string,
+  articleId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
+  paragraphId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
 };
 
 export default TextSuggestionForm;

@@ -12,13 +12,15 @@ class SuggestView extends React.Component {
     this.state = {
       title: null,
       paragraphs: [],
-      articleId: null
+      articleId: null,
+      articleURL: null
     }
   }
   
   componentWillMount() {
     const {articleURL} = queryString.parse(window.location.search);
     if (articleURL) {
+      this.setState({articleURL});
       getArticlePharagraphs(articleURL)
         .then((res) => {
           const {title, paragraphs, articleId} = res.data;
@@ -33,7 +35,7 @@ class SuggestView extends React.Component {
   }
 
   render () {
-    const {title, paragraphs, articleId} = this.state;
+    const {title, paragraphs, articleId, articleURL} = this.state;
     if (!articleId) {
       return <CircleLoader />
     }
@@ -46,6 +48,7 @@ class SuggestView extends React.Component {
               <TextSuggestionForm
                 key={index}
                 articleId={articleId}
+                articleURL={articleURL}
                 paragraphId={item.paragraphId}
                 originalText={item.text}/>
             ))

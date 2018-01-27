@@ -10,6 +10,7 @@ app
 	.use(bodyParser.json())
 	.use(bodyParser.urlencoded({extended: false}))
 	.use('/fb/', express.static(reactApp))
+	.use('/fb/result', express.static(reactApp))
 	.use(Routes)
 	.listen(serverPort);
 
