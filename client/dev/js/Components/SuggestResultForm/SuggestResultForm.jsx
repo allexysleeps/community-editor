@@ -71,6 +71,7 @@ class SuggestResultForm extends React.Component {
               suggestions.map((item, index) => {
                 const {usersText} = item;
                 return <UsersTextForm
+                  disabled={usersText === currentText}
                   key={index}
                   onClick={() => this.approveSuggestion(usersText)}
                   usersText={usersText}/>
